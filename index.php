@@ -1,16 +1,19 @@
 <?php   
 	
+	//Fonction qui verifie que l'url a déja été controlé par le bot
 	function url_visit($url)
 	{
-	
+		//Si le fichier lien_controle existe
 		if (file_exists('lien_controle'))
 		{
 			$lignes = file("lien_controle");
-			$fin = true;
+			$fin = false;
 
+			//On verifie que le lien est dans le fichier
 			foreach($lignes as $ligne){
+				//Si l'url est dans le fichier on retourne true
 				if(strstr($ligne,$url)){ 
-					$fin = false;
+					$fin = true;
 					break;
 				}
 			}
@@ -21,62 +24,100 @@
 		else
 			return false;
 	}
-
-	function recuper_info_page($url)
+	
+	
+	//Fonction verifiant que l'url est déja dans le fichier
+	function url_present($url)
 	{
-		// Analyse l'url
-        $analyse = parse_url($url);
-        $serveur = $analyse['host'];
-        $page = $analyse['path'];
-		
-		//On affiches les informations de la page en visite.
-		echo "Serveur : ".$serveur;
-		echo "<br> Page : ".$page;
-		echo "<br>";
-		
-		
-		///*** CONNEXION CURL = RECUPERATION DE LA PAGE ***\\\
-		//Initialisation
-		$ch = curl_init($url);
-		
-		//Si le fichier existe déja on le supprime => Economie de place
-		if(file_exists('txt_brut')){
-			unlink('txt_brut');
-		
+		//Si le fichier lien_suivre existe
+		if (file_exists('lien_a_suivre'))
+		{
+			$lignes = file("lien_a_suivre");
+			$fin = false;
+
+			foreach($lignes as $ligne){
+				if(strstr($ligne,$url)){ 
+					$fin = true;
+					break;
+				}
+			}
+
+			return $fin;
 		}
 		
-		//On ouvre en écriture et lecture + création du fichier
-		$fichier_brut = fopen('txt_brut','a+');
+		else
+			return false;
+	}
+		
+	
+	//Fonction de récupération de la page donné en paramètre
+	function recuper_info_page($url)
+	{
+		if(!url_visit($url))
+		{
+			echo "<p color='red'> Première Visite </p>";
+			
+			// Analyse l'url
+			$analyse = parse_url($url);
+			$serveur = $analyse['host'];
+			$page = $analyse['path'];
+			
+			//On affiches les informations de la page en visite.
+			echo "Serveur : ".$serveur;
+			echo "<br> Page : ".$page;
+			echo "<br>";
+			
+			
+			///*** CONNEXION CURL = RECUPERATION DE LA PAGE ***\\\
+			//Initialisation
+			$ch = curl_init($url);
+			
+			//Si le fichier existe déja on le supprime => Economie de place
+			if(file_exists('txt_brut')){
+				unlink('txt_brut');
+			
+			}
+			
+			//On ouvre en écriture et lecture + création du fichier
+			$fichier_brut = fopen('txt_brut','a+');
 
-		//On redirige le résultat sur notre fichier
-		curl_setopt($ch, CURLOPT_FILE, $fichier_brut);
-				
-		//On indique que nous ne voulons pas les HEADER
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-				
-		// exécution de curl
-		curl_exec($ch);
-				
-		// fermeture de la session curl
-		curl_close($ch);
-       
-		//fermeture de notre fichier
-		fclose($fichier_brut);
-		  
-		 //On déclenche alors l'extraction des liens 
-		extraction_lien($fichier_brut,$serveur);
-		
-		//On enregistre l'URL comme visitée
-		$visite = fopen('lien_controle','a');
-		$ajout_fichier = $url;
-		fputs($visite,$ajout_fichier);
-		fclose($visite);
-		
+			//On redirige le résultat sur notre fichier
+			curl_setopt($ch, CURLOPT_FILE, $fichier_brut);
+					
+			//On indique que nous ne voulons pas les HEADER
+			curl_setopt($ch, CURLOPT_HEADER, 0);
+					
+			// exécution de curl
+			curl_exec($ch);
+					
+			// fermeture de la session curl
+			curl_close($ch);
+		   
+			//fermeture de notre fichier
+			fclose($fichier_brut);
 			  
+			 //On déclenche alors l'extraction des liens 
+			extraction_lien($fichier_brut,$serveur);
+			
+			//On enregistre l'URL comme visitée si il n'est pas connue
+			if(!url_visit($url))
+			{
+				$visite = fopen('lien_controle','a');
+				$ajout_fichier = $url."\n";
+				fputs($visite,$ajout_fichier);
+				fclose($visite);
+				
+			}
+			
+		
+		}	
+
+		else
+			echo "<p color='red'> URL connue </p>";
 			
 	}
 		
-		
+	//Fonction d'extraction des liens
 	function extraction_lien($fichier,$prefixe)
 	{
 		$html_brut = file_get_contents('txt_brut');
@@ -103,6 +144,8 @@
 			if (!preg_match($pattern, $lien_tempo)) {
 				fputs($fp_fichier_liens, $follow_url);
 			}
+			
+		
 		}
 	}
 			
@@ -114,8 +157,13 @@
 		// puis on fait une boucle pour enregistrer tous les liens ds 1 fichier
 		foreach ($liens_extraits[0] as $element) {
 			$element = preg_replace('#"#', '', $element);
-			$follow_url = $prefixe.$element."\n";
-			fputs($fp_fichier_liens, $follow_url);
+			$follow_url = $prefixe.$element;
+			if(!url_present($follow_url))
+			{
+				$follow_url = $prefixe.$element."\n";
+				fputs($fp_fichier_liens, $follow_url);
+			}
+				
 		}
 	  }
 			
@@ -149,12 +197,6 @@
 		{
 			$url = $_POST['url'];
 			 recuper_info_page($url);
-			 
-			 if(url_visit($url))
-				 echo '<br> URL Déja Visitée';
-			 else
-				 echo '<br> Première Visite';
-	
 			 
 		}		
 	?>
