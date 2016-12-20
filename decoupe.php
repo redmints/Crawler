@@ -34,8 +34,6 @@
 		$array_b = array();
 		$array_i = array();
 		
-		$repet = False;
-		
 		foreach ($title as $word_title){
 			$array_title = explode(" ",$word_title->nodeValue);
 		}
@@ -140,60 +138,77 @@
 		
 		foreach ($array_title as $word_title){
 			if ($word_title != ""){
-				$mot_page[] = array($word_title, 1);
+				$mot_page[] = array(validation_mot($word_title), 1);
 			}
 		}
 		
 		foreach ($array_body as $word_body){
 			if ($word_body != ""){
-				$mot_page[] = array($word_body, 2);
+				$mot_page[] = array(validation_mot($word_body), 2);
 			}
 		}
 		
 		foreach ($array_h1 as $word_h1){
 			if ($word_h1 != ""){
-				$mot_page[] = array($word_h1, 3);
+				$mot_page[] = array(validation_mot($word_h1), 3);
 			}
 		}
 		
 		foreach ($array_h2 as $word_h2){
 			if ($word_h2 != ""){
-				$mot_page[] = array($word_h2, 4);
+				$mot_page[] = array(validation_mot($word_h2), 4);
 			}
 		}
 		
 		foreach ($array_h3 as $word_h3){
 			if ($word_h3 != ""){
-				$mot_page[] = array($word_h3, 5);
+				$mot_page[] = array(validation_mot($word_h3), 5);
 			}
 		}
 		
 		foreach ($array_h4 as $word_h4){
 			if ($word_h4 != ""){
-				$mot_page[] = array($word_h4, 6);
+				$mot_page[] = array(validation_mot($word_h4), 6);
 			}
 		}
 		
 		foreach ($array_b as $word_b){
 			if ($word_b != ""){
-				$mot_page[] = array($word_b, 7);
+				$mot_page[] = array(validation_mot($word_b), 7);
 			}
 		}
 		
 		foreach ($array_i as $word_i){
 			if ($word_i != ""){
-				$mot_page[] = array($word_i, 8);
+				$mot_page[] = array(validation_mot($word_i), 8);
 			}
 		}
 		
-		$csv_file = fopen('mot_page.csv', 'a+');
+		$csv_file = fopen('mot_page.csv', 'w+');
 		
 		foreach($mot_page as $line){
-			fputcsv($csv_file, $line, '|');
+			if ($line[0] != "")
+				fputcsv($csv_file, $line, '|');
 		}
 		
 		fclose($csv_file);
 		
+	}
+	
+	function validation_mot($mot){
+		
+		$mot = str_split($mot);
+		
+		$char_non_valide = array('"','-','?','.',';',':','(',')',',','_','/','|','=','^','#','%','~',"\n",'\'','!','\\','{','}','*');
+		$mot_valide = "";
+		
+		foreach($mot as $char){
+			if (!in_array($char, $char_non_valide)){
+				$mot_valide = $mot_valide.$char;
+			}
+		}
+		
+		return $mot_valide;
 	}
 	
 	decoupe();
