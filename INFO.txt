@@ -1,0 +1,9 @@
+--------------------------------------
+Informations sur l'organisation
+--------------------------------------
+
+Dans le dossier "Interface" : 
+Tout ce qui concerne l'interface, pour le moment, sans implémentation sous laravel
+
+Dans le dossier "Crawler" : 
+Tout ce qui concerne les tests pour le crawler, sans implémentation sous Laravel
