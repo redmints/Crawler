@@ -11,10 +11,8 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'ControleurRecherche\Recherche@getForm');
+Route::post('resultat', 'ControleurRecherche\Recherche@postForm');
 
-Route::get('users', 'UsersController@getInfos');
-Route::post('users', 'UsersController@postInfos');
-
-Route::get('crawler', 'Crawler@getForm');
-Route::post('crawler', 'Crawler@postForm');
+Route::get('crawler', 'ControleurCrawler\Crawler@getForm');
+Route::post('crawler', 'ControleurCrawler\Crawler@postForm');

@@ -1,4 +1,4 @@
-@extends('templateCrawler')
+@extends('VueCrawler/templateCrawler')
 
 @section('titre')
   Crawler
@@ -11,7 +11,7 @@
     <br><br>
 
     @foreach($mots as $mot)
-     {{$mot}}<br>
+     {{$mot}}<br><br><br>
     @endforeach
 
 @endsection

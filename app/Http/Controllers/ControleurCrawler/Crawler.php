@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ControleurCrawler;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class Crawler extends Controller
 {
   public function getForm() {
-    return view('lancement');
+    return view('VueCrawler/lancement');
   }
 
   public function postForm(Request $request) {
@@ -15,9 +16,10 @@ class Crawler extends Controller
     $nbPages = $request->input('nbPages');
     $page = Crawler::recupPage($url);
     $page = Parse::recupMots($page);
-    $page = Parse::purifier($page);
-    $mots = Parse::giveImportance($page);
-    return view('resultat', compact('url', 'nbPages', 'mots'));
+    $mots = Parse::purifier($page);
+    //$mots = Parse::giveImportance($page);
+    return view('VueCrawler/resultat', compact('url', 'nbPages', 'mots'));
+    //return print_r($mots);
   }
 
   public function recupPage($url) {

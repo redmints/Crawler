@@ -1,4 +1,4 @@
-@extends('templateCrawler')
+@extends('VueCrawler/templateCrawler')
 
 @section('titre')
   Crawler
