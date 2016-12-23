@@ -14,7 +14,8 @@ class Crawler extends Controller
     $url = $request->input('url');
     $nbPages = $request->input('nbPages');
     $page = Crawler::recupPage($url);
-    $mots = Parse::recupMots($page);
+    $page = Parse::recupMots($page);
+    $mots = Parse::purifier($page);
     return view('resultat', compact('url', 'nbPages', 'mots'));
   }
 
