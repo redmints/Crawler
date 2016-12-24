@@ -11,7 +11,7 @@
     <br><br>
 
     @foreach($mots as $mot)
-     {{$mot}}<br><br><br>
+     {{$mot}}<br>
     @endforeach
 
 @endsection

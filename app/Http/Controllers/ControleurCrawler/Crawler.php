@@ -15,11 +15,11 @@ class Crawler extends Controller
     $url = $request->input('url');
     $nbPages = $request->input('nbPages');
     $page = Crawler::recupPage($url);
-    $page = Parse::recupMots($page);
-    $mots = Parse::purifier($page);
-    //$mots = Parse::giveImportance($page);
-    return view('VueCrawler/resultat', compact('url', 'nbPages', 'mots'));
-    //return print_r($mots);
+    $lignes = Parse::recupLignes($page);
+    $lignes = Parse::purifier($lignes);
+    $mots = Parse::getImportance($lignes);
+    //return view('VueCrawler/resultat', compact('url', 'nbPages', 'mots'));
+    return print_r($mots);
   }
 
   public function recupPage($url) {
