@@ -13,7 +13,7 @@
 	<body>
 		<!--Entete du site-->
 		<header>
-			<a href="/"><div id="result_title">WOBLE</div></a>
+			<a href="./"><div id="result_title">WOBLE</div></a>
 			<form id="search_form_result" action="resultat" method="post">
 				{{ csrf_field() }}
 				<input class="search_bar_result" name="recherche" type="text" placeholder="Rechercher..."></input>
