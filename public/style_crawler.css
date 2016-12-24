@@ -24,10 +24,9 @@ h2 {
 	margin: 0;
 }
 
-.formulaire {
+.bloc {
 	width: 60%;
-	margin: 20%;
-	margin-top: 0px;
+	margin: 10px 20%;
 	padding: 15px 0;
  	text-align: center;
 	border: 1px solid #000000;
@@ -51,3 +50,5 @@ h2 {
 .red_button:active {
 	transform: scale(0.95);
 }
+
+/*resultat*/
