@@ -17,7 +17,7 @@ class Crawler extends Controller
     $page = Crawler::recupPage($url);
     $lignes = Parse::recupLignes($page);
     $lignes = Parse::purifier($lignes);
-    $mots = Parse::getImportance($lignes);
+    $mots = Parse::getBalises($lignes);
     //return view('VueCrawler/resultat', compact('url', 'nbPages', 'mots'));
     return print_r($mots);
   }

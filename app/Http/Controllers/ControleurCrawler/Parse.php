@@ -34,7 +34,7 @@ class Parse extends Controller
     return $newTab;
   }
 
-  public static function getImportance($page) {
+  public static function getBalises($page) {
     $retour = array();
     $balise = "STD";
     for($i = 0; $i < count($page); $i++) {
@@ -51,7 +51,8 @@ class Parse extends Controller
         // si c'est du contenu de balise
         $mots = explode(" ", $ligne);
         for($j = 0; $j < count($mots); $j++) {
-          $mot = Parse::normalise($mots[$j]);
+          $mot = Parse::normaliseMot($mots[$j]);
+          $balise = Parse::normaliseBalises($balise);
           if(array_key_exists($mot, $retour)) {
             $tabBalises = $retour[$mot];
             if(!in_array($balise, $tabBalises)) {
@@ -68,9 +69,30 @@ class Parse extends Controller
     return $retour;
   }
 
-  public static function normalise($str) {
+  public static function normaliseMot($str) {
     $str = strtolower($str);
     $str = preg_replace('~[^\pL\d]+~u', '', $str);
     return $str;
+  }
+
+  public static function normaliseBalises($str) {
+    if(isset($str)) {
+      $str = strtolower($str);
+      $str = explode(" ", $str);
+      $str = $str[0];
+      if(substr($str, strlen($str)-1, strlen($str)) == ">") {
+        $str = substr($str, 0, strlen($str)-1);
+      }
+      else if(substr($str, strlen($str)-2, strlen($str)) == "/>") {
+        $str = substr($str, 0, strlen($str)-2);
+      }
+      if(substr($str, 0, 1) == "<") {
+        $str = substr($str, 1, strlen($str));
+      }
+      else if(substr($str, 0, 2) == "</") {
+        $str = substr($str, 2, strlen($str));
+      }
+      return $str;
+    }
   }
 }
