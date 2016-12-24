@@ -12,7 +12,7 @@
 	</head>
 	<body>
 		<div id="main_box">
-			<a href="/"><h1 id="main_title">WOBLE</h1></a>
+			<a href="./"><h1 id="main_title">WOBLE</h1></a>
 			<form id="search_form" action="resultat" method="post">
 				{{ csrf_field() }}
 				<input class="search_bar" name="recherche" type="text" placeholder="Rechercher...">
