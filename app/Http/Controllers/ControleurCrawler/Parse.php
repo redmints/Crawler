@@ -36,7 +36,7 @@ class Parse extends Controller
 
   public static function getBalises($page) {
     $retour = array();
-    $balise = "STD";
+    $balise = "std";
     for($i = 0; $i < count($page); $i++) {
       $ligne = $page[$i];
       // si c'est une balise ouvrante
@@ -45,7 +45,7 @@ class Parse extends Controller
       }
       // si c'est une balise fermante
       else if(substr($ligne,0,2) == "</") {
-        $balise = "STD";
+        $balise = "std";
       }
       else {
         // si c'est du contenu de balise
@@ -55,9 +55,7 @@ class Parse extends Controller
           $balise = Parse::normaliseBalises($balise);
           if(array_key_exists($mot, $retour)) {
             $tabBalises = $retour[$mot];
-            if(!in_array($balise, $tabBalises)) {
-              $tabBalises[] = $balise;
-            }
+            $tabBalises[] = $balise;
             $retour[$mot] = $tabBalises;
           }
           else {
