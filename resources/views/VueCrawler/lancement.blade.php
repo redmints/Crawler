@@ -6,7 +6,7 @@
 
 @section('contenu')
 	<a href="./"><h1>WOBLE</h1></a>
-	<div class="formulaire">
+	<div class="bloc">
 		<h2>Lancement du crawler</h2>
 		<p>
 			{!! Form::open(['url' => 'crawler']) !!}
