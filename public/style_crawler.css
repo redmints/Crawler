@@ -43,3 +43,11 @@ h2 {
 	padding: 1px 20px;
 	cursor: pointer;
 }
+
+.red_button:hover {
+	background-color: #E84545;
+}
+
+.red_button:active {
+	transform: scale(0.95);
+}

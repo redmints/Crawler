@@ -12,9 +12,9 @@
 			{!! Form::open(['url' => 'crawler']) !!}
 				{{ csrf_field() }}
 				{!! Form::label('url', 'Entrez une url de départ : ') !!} <br>
-				{!! Form::text('url') !!} <br>
+				{!! Form::text('url', '', ['required' => 'required']) !!} <br>
 				{!! Form::label('nbPages', 'Entrez un nombre de pages à crawler : ') !!} <br>
-				{!! Form::text('nbPages') !!}<br><br>
+				{!! Form::number('nbPages', '', ['required' => 'required']) !!}<br><br>
 				{!! Form::submit('Lancer', ['class'=>'red_button']) !!}
 			{!! Form::close() !!}
 		</p>
