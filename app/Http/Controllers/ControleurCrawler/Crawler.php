@@ -32,6 +32,7 @@ class Crawler extends Controller
   }
 
   public function getImportance($mots) {
+    $retour = array();
     foreach ($mots as $mot => $tabBalises) {
       $importance = 0;
       for($i = 0; $i < count($tabBalises); $i++) {

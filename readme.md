@@ -11,6 +11,9 @@ Pour que l'on ai tous accès au framework, suivez ces étapes :
 - Faites une copie du fichier ".env.example" et renommez-le ".env"
 - Dans votre terminal faites "composer update" à la racine de votre dépôt local
 - Dans votre terminal faites "php artisan key:generate" à la racine de votre dépôt local
+- Pour installer la migration, faites "php artisan migrate:install"
+- Pour migrer la base de données, faites "php artisan migrate"
+- Pour peupler la table balises, faites "php artisan db:seed"
 - Faites pointer votre serveur web dans le répertoire public
 
 Normalement, ça devrait marcher
