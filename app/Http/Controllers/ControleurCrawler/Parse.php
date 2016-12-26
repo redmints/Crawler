@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ControleurCrawler;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class Parse extends Controller
 {
@@ -13,16 +14,11 @@ class Parse extends Controller
 
   public static function purifier($page) {
     $newTab = array();
-    $balises[] = "title";
-    $balises[] = "h1";
-    $balises[] = "h2";
-    $balises[] = "h3";
-    $balises[] = "h4";
-    $balises[] = "p";
+    $balises = DB::table('balises')->get();
     for($i = 0; $i < count($page); $i++) {
       $ligne = $page[$i];
       for($j = 0; $j < count($balises); $j++) {
-        $balise = $balises[$j];
+        $balise = $balises[$j]->balise;
         if(((substr($ligne,0,strlen($balise)+1) == "<".$balise)
         || (substr($ligne,0,1) != "<")
         || (substr($ligne,0,strlen($balise)+2) == "</".$balise))

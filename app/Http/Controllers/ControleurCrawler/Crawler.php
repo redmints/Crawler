@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ControleurCrawler;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class Crawler extends Controller
 {
@@ -33,29 +34,14 @@ class Crawler extends Controller
 
   public function getImportance($mots) {
     $retour = array();
+    $balises = DB::table('balises')->get();
     foreach ($mots as $mot => $tabBalises) {
       $importance = 0;
       for($i = 0; $i < count($tabBalises); $i++) {
-        if($tabBalises[$i] == "std") {
-          $importance += 1;
-        }
-        else if($tabBalises[$i] == "p") {
-          $importance += 2;
-        }
-        else if($tabBalises[$i] == "h4") {
-          $importance += 3;
-        }
-        else if($tabBalises[$i] == "h3") {
-          $importance += 4;
-        }
-        else if($tabBalises[$i] == "h2") {
-          $importance += 5;
-        }
-        else if($tabBalises[$i] == "h1") {
-          $importance += 6;
-        }
-        else if($tabBalises[$i] == "title") {
-          $importance += 7;
+        for($j = 0; $j < count($balises); $j++) {
+          if($balises[$j]->balise == $tabBalises[$i]) {
+            $importance += $balises[$j]->poids;
+          }
         }
       }
       $retour[$mot] = $importance;
