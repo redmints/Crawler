@@ -52,15 +52,27 @@ class Parse extends Controller
           if(array_key_exists($mot, $retour)) {
             $tabBalises = $retour[$mot];
             $tabBalises[] = $balise;
+            $tabBalises[0] += 1;
             $retour[$mot] = $tabBalises;
           }
           else {
-            $retour[$mot] = array($balise);
+            $retour[$mot] = array("1", $balise);
           }
         }
       }
     }
     return $retour;
+  }
+
+  public static function getTitle($page) {
+    $title = "";
+    for($i = 0; $i < count($page); $i++) {
+      $ligne = $page[$i];
+      if(substr($ligne,0,6) == "<title") {
+        $title = $page[$i+=1];
+      }
+    }
+    return $title;
   }
 
   public static function normaliseMot($str) {
