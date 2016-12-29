@@ -16,6 +16,7 @@ Pour que l'on ai tous accès au framework, suivez ces étapes :
 - Dans votre terminal faites "php artisan key:generate" à la racine de votre dépôt local
 - Pour installer la migration, faites "php artisan migrate:install"
 - Pour migrer la base de données, faites "php artisan migrate"
+- Faites "composer dumpautoload"
 - Pour peupler la table balises, faites "php artisan db:seed"
 
 - Faites pointer votre serveur web dans le répertoire public
