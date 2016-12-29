@@ -15,8 +15,8 @@ class CreateWebsiteTable extends Migration
     {
       Schema::create('website', function(Blueprint $table) {
         $table->increments('id');
-        $table->string('url', 100);
-        $table->string('title', 100)->default("title");
+        $table->string('url', 10000);
+        $table->string('title', 10000)->default("title");
         $table->boolean('etat')->default(false);
       });
     }

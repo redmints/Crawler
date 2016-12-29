@@ -17,6 +17,7 @@ class Crawler extends Controller
   }
 
   public function postForm(Request $request) {
+    set_time_limit(60*60*24*365);
     $url = $request->input('url');
     $nbPages = $request->input('nbPages');
     $pagesCrawl = 0;
@@ -29,8 +30,7 @@ class Crawler extends Controller
       Crawler::go($url, $websiteid);
       $pagesCrawl += 1;
     }
-    //return view('VueCrawler/resultat', compact('url', 'nbPages', 'mots'));
-    return count($website);
+    return view('VueCrawler/resultat', compact('pagesCrawl'));
   }
 
   public function recupPage($url) {
@@ -62,6 +62,7 @@ class Crawler extends Controller
   public function parse($url) {
     $page = Crawler::recupPage($url);
     $lignes = Parse::recupLignes($page);
+    Crawler::peuplerUrl($url, $lignes);
     $lignes = Parse::purifier($lignes);
     $title = Parse::getTitle($lignes);
     $balises = Parse::getBalises($lignes);
@@ -120,5 +121,11 @@ class Crawler extends Controller
       $keyword->save();
     }
   }
+
+  public function peuplerUrl($url, $lignes) {
+    $liens = Parse::recupLiens($url, $lignes);
+    for($i = 0; $i < count($liens); $i++) {
+      Crawler::insertUrl($liens[$i]);
+    }
+  }
 }
-//Faire la fonction insert link et la fonction de recherche de lien

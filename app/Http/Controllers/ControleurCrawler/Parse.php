@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ControleurCrawler;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Utils;
 
 class Parse extends Controller
 {
@@ -100,5 +101,54 @@ class Parse extends Controller
       }
       return $str;
     }
+  }
+
+  public static function recupLiens($url, $lignes) {
+    $retour = array();
+    $url = Parse::parseUrl($url);
+    for($i = 0; $i < count($lignes); $i++) {
+      $ligne = $lignes[$i];
+      if((substr($ligne,0,1) == "<") && (stristr($ligne, "href"))) {
+        $ligne = str_replace(" ", "", $ligne);
+        $pos = strpos($ligne, "href=")+6;
+        $ligne = substr($ligne,$pos,strlen($ligne));
+
+        if(strpos($ligne, "\"") !== false) {
+          $pos = strpos($ligne, "\"");
+        }
+        else {
+          $pos = strpos($ligne, "'");
+        }
+
+        $lien = substr($ligne,0,$pos);
+        if(substr($lien,0,1) != "#") {
+          if((substr($lien,0,7) == "http://") || (substr($lien,0,8) == "https://")) {
+            $retour[] = $lien;
+          }
+          else if(substr($lien,0,1) == "/") {
+            $retour[] = $url[0].$lien;
+          }
+          else {
+            $link = "";
+            for($j = 0; $j < count($url)-1; $j++) {
+              $link .= $url[$j];
+              $link .= "/";
+            }
+            $link .= $lien;
+            $retour[] = $link;
+          }
+        }
+      }
+    }
+    return $retour;
+  }
+
+  public static function parseUrl($url) {
+    $url = explode("/", $url);
+    $url[0] = $url[0]."//".$url[2];
+    unset($url[1]);
+    unset($url[2]);
+    $url = array_values($url);
+    return $url;
   }
 }
