@@ -86,10 +86,21 @@ class Crawler extends Controller
   public function insertKeyword($mot) {
     $keyword = new Keywords;
     $keywords = DB::table('keywords')->where('text', $mot)->get();
+    $ignoreMots = array();
+    $ignore = DB::table('ignore')->get();
+    for($i = 0; $i < count($ignore); $i++) {
+      $ignoreMots[] = $ignore[$i]->mot;
+    }
+
     if(count($keywords) == 0) {
-      $keyword->text = $mot;
-      $keyword->save();
-      return $keyword->id;
+      if(!in_array($mot, $ignoreMots)) {
+        $keyword->text = $mot;
+        $keyword->save();
+        return $keyword->id;
+      }
+      else {
+        return 0;
+      }
     }
     else {
       return $keywords[0]->id;
@@ -111,14 +122,17 @@ class Crawler extends Controller
       $keywordid = Crawler::insertKeyword($mot);
       $importance = $tab[0];
       $freq = $tab[1];
-      Crawler::insertLink($websiteid, $keywordid, $freq, $importance);
+      if($keywordid != 0) {
+        Crawler::insertLink($websiteid, $keywordid, $freq, $importance);
+      }
       $website = Website::where('id', $websiteid)->first();
       $website->etat = 1;
       $website->save();
-
-      $keyword = Keywords::where('id', $keywordid)->first();
-      $keyword->frequency += $freq;
-      $keyword->save();
+      if($keywordid != 0) {
+        $keyword = Keywords::where('id', $keywordid)->first();
+        $keyword->frequency += $freq;
+        $keyword->save();
+      }
     }
   }
 
