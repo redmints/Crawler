@@ -11,7 +11,7 @@ use App\Link;
 use App\Http\Controllers\Utils;
 
 class Crawler extends Controller
-{
+{	
   public function getForm() {
     return view('VueCrawler/lancement');
   }
