@@ -16,9 +16,6 @@
 			Le crawl s'est bien déroulé<br>
 			{{$pagesCrawl}} pages traitées
 		</p>
-		{!! Form::open(['url' => 'stats']) !!}
-			{{ csrf_field() }}
-			{!! Form::submit('Voir statistiques', ['class'=>'red_button']) !!}
-		{!! Form::close() !!}
+		<input class="red_button" type="button" value="Statistiques" onclick="self.location.href='stats'">
 	</div>
 @endsection

@@ -26,8 +26,4 @@ class Statistique extends Controller
     return view('VueCrawler/statistique', compact('sites', 'keywords', 'links', 'nbsites'));
     //return print_r($links);
   }
-
-  public function postForm() {
-    return view('VueCrawler/statistique');
-  }
 }
