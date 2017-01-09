@@ -27,16 +27,9 @@
 						legendText: "{indexLabel}",
 						toolTipContent: "{indexLabel} - {y} (#percent %)",
 						dataPoints: [
-							{ y: 10584, indexLabel: "espace" },
-							{ y: 775, indexLabel: "img" },
-							{ y: 748, indexLabel: "alt" },
-							{ y: 670, indexLabel: "border0" },
-							{ y: 669, indexLabel: "srchttpforumouimathiasestmoche"},
-							{ y: 650, indexLabel: "width11" },
-							{ y: 650, indexLabel: "height11" },
-							{ y: 501, indexLabel: "0px" },
-							{ y: 133, indexLabel: "background"},
-							{ y: 103, indexLabel: "br"}
+							@foreach ($keywords as $keyword)
+								{ y: {{ $keyword->frequency }}, indexLabel: "{{ $keyword->text }}" },
+							@endforeach
 						]
 					}
 					]
@@ -48,11 +41,9 @@
 						type: "column",
 						toolTipContent: "{label} - {y}",
 						dataPoints: [
-							{ label: "site(1) - mathias",  y: 801  },
-							{ label: "site(2) - chifumi", y: 753  },
-							{ label: "site(3) - programmation", y: 854  },
-							{ label: "site(4) - php",  y: 986  },
-							{ label: "site(5) - clou de girofle",  y: 788  }
+							@foreach ($links as $link)
+								{ label: "{{ $link["title"] }} - {{ $link["text"] }}",  y: {{ $link["frequency"] }}  },
+							@endforeach
 						]
 					}
 					]
@@ -67,8 +58,7 @@
 		<div class="bloc">
 			<h2>Statistiques de l'opération de crawling</h2>
 			<p>
-				Durée de l'opération de crawling : <br>
-				Nombre de sites crawlés : <br>
+				Nombre de sites crawlés : {{ $nbsites }}<br>
 			</p>
 			<p>
 				Vous trouverez ci-dessous le résultat de l'opération de crawling
@@ -83,36 +73,17 @@
 					<th>Titre</th>
 					<th>Liens</th>
 				</tr>
-				<tr>
-					<td>t1</td>
-					<td>lien1</td>
-				</tr>
-				<tr>
-					<td>t2</td>
-					<td>lien2</td>
-				</tr>
+				@foreach ($sites as $site)
+					<tr>
+						<td>{{ $site->title }}</td>
+						<td>{{ $site->url }}</td>
+					</tr>
+				@endforeach
 			</table>
 		</div>
 		<h2>Les 10 mots les plus rencontrés</h2>
 		<div id="piechart_mots"></div>
 		<h2>Le mot le plus rencontré par sites</h2>
 		<div id="columnchart_mots"></div>
-		<div class="tab_site">
-			<h2>Totalité des mots crawlés</h2>
-			 <table style="width:100%; border-collapse:collapse;">
-				<tr>
-					<th>Mot</th>
-					<th>Fréquence</th>
-				</tr>
-				<tr>
-					<td>espace</td>
-					<td>14584</td>
-				</tr>
-				<tr>
-					<td>img</td>
-					<td>775</td>
-				</tr>
-			</table>
-		</div>
 	</body>
 </html>
