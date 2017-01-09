@@ -41,9 +41,9 @@
 					}
 					]
 				});
-				//second chart	
+				//second chart
 				var columnchart = new CanvasJS.Chart("columnchart_mots", {
-					data: [              
+					data: [
 					{
 						type: "column",
 						toolTipContent: "{label} - {y}",
@@ -67,11 +67,11 @@
 		<div class="bloc">
 			<h2>Statistiques de l'opération de crawling</h2>
 			<p>
-				Durée de l'opération de crawling : {{$tempsCrawl}}<br>
-				Nombre de sites crawlés : {{$pagesCrawl}}<br>
+				Durée de l'opération de crawling : <br>
+				Nombre de sites crawlés : <br>
 			</p>
-			<p>			
-				Vous trouverez ci-dessous le résultat de l'opération de crawling 
+			<p>
+				Vous trouverez ci-dessous le résultat de l'opération de crawling
 				sous forme de graphiques et de tableaux.
 			</p>
 		</div>
@@ -91,7 +91,7 @@
 					<td>t2</td>
 					<td>lien2</td>
 				</tr>
-			</table> 
+			</table>
 		</div>
 		<h2>Les 10 mots les plus rencontrés</h2>
 		<div id="piechart_mots"></div>
@@ -112,7 +112,7 @@
 					<td>img</td>
 					<td>775</td>
 				</tr>
-			</table> 
+			</table>
 		</div>
 	</body>
 </html>
