@@ -94,7 +94,7 @@ class Crawler extends Controller
     }
 
     if(count($keywords) == 0) {
-      if(!in_array($mot, $ignoreMots)) {
+      if(!in_array($mot, $ignoreMots) && strlen($mot) < 27) {
         $keyword->text = $mot;
         $keyword->save();
         return $keyword->id;
