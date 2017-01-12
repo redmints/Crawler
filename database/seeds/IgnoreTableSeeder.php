@@ -8,11 +8,8 @@ class IgnoreTableSeeder extends Seeder {
 
     $mots = array("de","la","le","à","a","dès","et","les","en","des","du","un","dans","sur","pour","par","est","une","que","qui","au","avec"
     ,"où","se","il","ce","leur","son","sont","comme","pas","ne","cette","aux","on","sa","tout","mais","ont","ils","leurs","je","tu","nous"
-<<<<<<< HEAD
     ,"vous","même","aussi","ses","ces","cet","tous","là","dè","lê","dû","pär","the","sûr","of","sé","elle","dun","and","né");
-=======
     ,"vous","même","aussi","ses","ces","cet","tous","","À","ou");
->>>>>>> f54f3c8dc024a4e85dcb15667b3b8769d29070d4
 
     for($i = 0; $i < count($mots); $i++) {
       DB::table('ignore')->insert([
