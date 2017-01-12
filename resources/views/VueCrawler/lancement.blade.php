@@ -4,6 +4,9 @@
   Crawler - Lancement
 @endsection
 
+@section('scripts')
+@endsection
+
 @section('contenu')
 	<a href="./"><h1>WOBLE</h1></a>
 	<div class="bloc">

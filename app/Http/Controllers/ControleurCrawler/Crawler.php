@@ -67,7 +67,8 @@ class Crawler extends Controller
     $title = Parse::getTitle($lignes);
     $balises = Parse::getBalises($lignes);
     $mots = Crawler::getImportance($balises);
-    return $mots;
+    $retour = array($mots, $title);
+    return $retour;
   }
 
   public function insertUrl($url) {
@@ -93,7 +94,7 @@ class Crawler extends Controller
     }
 
     if(count($keywords) == 0) {
-      if(!in_array($mot, $ignoreMots)) {
+      if(!in_array($mot, $ignoreMots) && strlen($mot) < 27) {
         $keyword->text = $mot;
         $keyword->save();
         return $keyword->id;
@@ -117,7 +118,9 @@ class Crawler extends Controller
   }
 
   public function go($url, $websiteid) {
-    $mots = Crawler::parse($url);
+    $parse = Crawler::parse($url);
+    $mots = $parse[0];
+    $title = $parse[1];
     foreach ($mots as $mot => $tab) {
       $keywordid = Crawler::insertKeyword($mot);
       $importance = $tab[0];
@@ -126,6 +129,7 @@ class Crawler extends Controller
         Crawler::insertLink($websiteid, $keywordid, $freq, $importance);
       }
       $website = Website::where('id', $websiteid)->first();
+      $website->title = $title;
       $website->etat = 1;
       $website->save();
       if($keywordid != 0) {

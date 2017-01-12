@@ -30,6 +30,7 @@ h2 {
 	padding: 15px 0;
  	text-align: center;
 	border: 1px solid #000000;
+	background-color: #ffffff;
 }
 
 .red_button {
@@ -51,4 +52,28 @@ h2 {
 	transform: scale(0.95);
 }
 
-/*resultat*/
+/*statistiques*/
+#piechart_mots {
+	margin: auto; 
+	height: 400px; 
+	width: 95%;
+}
+
+#columnchart_mots {
+	margin: auto; 
+	height: 400px; 
+	width: 95%;
+}
+
+.tab_site{
+	position: relative;
+	display: inline-block;
+	width: 50%;
+	margin: 0 25%;
+	margin-bottom: 30px;
+}
+
+.tab_site td, .tab_site th{
+	border: 1px solid black;
+	background-color: #ffffff;
+}
