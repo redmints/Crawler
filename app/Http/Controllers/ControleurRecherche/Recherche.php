@@ -14,10 +14,13 @@ class Recherche extends Controller
   public function postForm(Request $request) {
 	
 	$data = array();
+	
 	$data[] = array("Titre bidon 1", "http://bidonville.com");
 	$data[] = array("Titre bidon 2", "http://feezzef.com");
 	$data[] = array("Titre bidon 3", "http://lomaoe.com");
 	
-	return view('VueRecherche/resultat')->with($data);
+	$tab = array("results" => $data);
+	
+	return view('VueRecherche/resultat')->with($tab);
   }
 }
