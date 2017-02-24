@@ -22,20 +22,26 @@
 		</header>
 		<!--Affichage des resultats-->
 		<div id="main_block">
-			<div class="result_block">
-				<h3>Titre du site</h3>
-				<a class="link_web" href="#">lienVersleSite.com</a>
-				<span class="resume">
-					Qui cum venisset ob haec festinatis itineribus Antiochiam,
-					praestrictis palatii ianuis, contempto Caesare, quem videri decuerat,
-					ad praetorium cum pompa sollemni perrexit morbosque diu causatus nec
-					regiam introiit nec processit in publicum.
-					Qui cum venisset ob haec festinatis itineribus Antiochiam,
-					praestrictis palatii ianuis, contempto Caesare, quem videri decuerat,
-					ad praetorium cum pompa sollemni perrexit morbosque diu causatus nec
-					regiam introiit nec processit in publicum.
-				</span>
-			</div>
+			<?php 
+				foreach($results as $tab) {
+					?>
+					<div class="result_block">
+						<h3><?php echo $tab[0]; ?></h3>
+						<a class="link_web" href="#"><?php echo $tab[1]; ?></a>
+						<span class="resume">
+							Qui cum venisset ob haec festinatis itineribus Antiochiam,
+							praestrictis palatii ianuis, contempto Caesare, quem videri decuerat,
+							ad praetorium cum pompa sollemni perrexit morbosque diu causatus nec
+							regiam introiit nec processit in publicum.
+							Qui cum venisset ob haec festinatis itineribus Antiochiam,
+							praestrictis palatii ianuis, contempto Caesare, quem videri decuerat,
+							ad praetorium cum pompa sollemni perrexit morbosque diu causatus nec
+							regiam introiit nec processit in publicum.
+						</span>
+					</div>
+					<?php
+				}
+			?>
 		</div>
 	</body>
 </html>
