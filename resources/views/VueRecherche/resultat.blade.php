@@ -21,27 +21,23 @@
 			</form>
 		</header>
 		<!--Affichage des resultats-->
-		<div id="main_block">
-			<?php 
-				foreach($results as $tab) {
-					?>
-					<div class="result_block">
-						<h3><?php echo $tab[0]; ?></h3>
-						<a class="link_web" href="#"><?php echo $tab[1]; ?></a>
-						<span class="resume">
-							Qui cum venisset ob haec festinatis itineribus Antiochiam,
-							praestrictis palatii ianuis, contempto Caesare, quem videri decuerat,
-							ad praetorium cum pompa sollemni perrexit morbosque diu causatus nec
-							regiam introiit nec processit in publicum.
-							Qui cum venisset ob haec festinatis itineribus Antiochiam,
-							praestrictis palatii ianuis, contempto Caesare, quem videri decuerat,
-							ad praetorium cum pompa sollemni perrexit morbosque diu causatus nec
-							regiam introiit nec processit in publicum.
-						</span>
-					</div>
-					<?php
-				}
-			?>
+		<div id="main_block"> 
+			@foreach($results as $tab)
+				<div class="result_block">
+					<h3>{{ $tab[0] }}</h3>
+					<a class="link_web" href="#">{{ $tab[1] }}</a>
+					<span class="resume">
+						Qui cum venisset ob haec festinatis itineribus Antiochiam,
+						praestrictis palatii ianuis, contempto Caesare, quem videri decuerat,
+						ad praetorium cum pompa sollemni perrexit morbosque diu causatus nec
+						regiam introiit nec processit in publicum.
+						Qui cum venisset ob haec festinatis itineribus Antiochiam,
+						praestrictis palatii ianuis, contempto Caesare, quem videri decuerat,
+						ad praetorium cum pompa sollemni perrexit morbosque diu causatus nec
+						regiam introiit nec processit in publicum.
+					</span>
+				</div>
+			@endforeach
 		</div>
 	</body>
 </html>
