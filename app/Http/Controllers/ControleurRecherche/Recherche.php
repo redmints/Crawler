@@ -13,13 +13,16 @@ class Recherche extends Controller
 
   public function postForm(Request $request) {
 	
+	$keywords = $request->input('recherche');
+	$words = $parts = explode(" ", $keywords);
+	
 	$data = array();
 	
 	$data[] = array("Titre bidon 1", "http://bidonville.com");
 	$data[] = array("Titre bidon 2", "http://feezzef.com");
 	$data[] = array("Titre bidon 3", "http://lomaoe.com");
 	
-	$tab = array("results" => $data);
+	$tab = array("results" => $data, "keywords" => $keywords, "words" => $words);
 	
 	return view('VueRecherche/resultat')->with($tab);
   }

@@ -82,6 +82,7 @@ header {
 }
 
 .search_bar_result {
+  padding-left: 4px;
   position: absolute;
   float: left;
   width: calc(100% - 39px);

@@ -16,10 +16,12 @@
 			<a href="./"><div id="result_title">WOBLE</div></a>
 			<form id="search_form_result" action="resultat" method="post">
 				{{ csrf_field() }}
-				<input class="search_bar_result" name="recherche" type="text" placeholder="Rechercher..."></input>
+				<input class="search_bar_result" name="recherche" type="text" value="<?php echo $keywords ; ?>">
+				</input>
 				<input class="search_button_result" type="submit" value=""></input>
 			</form>
 		</header>
+		<?php print_r($words) ; ?>
 		<!--Affichage des resultats-->
 		<div id="main_block"> 
 			@foreach($results as $tab)
