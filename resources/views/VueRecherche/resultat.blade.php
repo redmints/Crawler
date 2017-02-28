@@ -21,10 +21,33 @@
 				<input class="search_button_result" type="submit" value=""></input>
 			</form>
 		</header>
-		<?php print_r($words) ; ?>
 		<!--Affichage des resultats-->
-		<div id="main_block"> 
-			@foreach($results as $tab)
+		<?php
+			echo "<br/>";
+			echo "Liste des id des sites contenant au moins un des mot-clés : <br/>";
+			foreach($related_website_ids as $a)
+			{
+				echo $a;
+				echo "<br/>";
+			}
+			echo "<br/>";
+
+			echo "Liste des résultats par ordre de pertinence : <br/>";
+			foreach($results as $a)
+			{
+				print_r($a);
+				echo "<br/>";
+			}
+			echo "<br/>";
+			echo "Liste des requêtes SQL : <br/>";
+			foreach($queries as $query)
+			{
+				echo $query;
+				echo "<br/>";
+			}
+		?>
+		<div id="main_block">
+			@foreach($data as $tab)
 				<div class="result_block">
 					<h3>{{ $tab[0] }}</h3>
 					<a class="link_web" href="#">{{ $tab[1] }}</a>
