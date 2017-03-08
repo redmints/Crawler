@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'ControleurRecherche\Recherche@getForm');
+Route::get('resultat/{keywords}/{start}/', 'ControleurRecherche\Recherche@getResults');
 Route::post('resultat', 'ControleurRecherche\Recherche@postForm');
 
 Route::get('crawler', 'ControleurCrawler\Crawler@getForm');

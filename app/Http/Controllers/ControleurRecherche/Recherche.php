@@ -9,77 +9,120 @@ use PDO;
 
 class Recherche extends Controller
 {
-  public function getForm() {
-    return view('VueRecherche/recherche');
-  }
-
-  public function postForm(Request $request) {
-
-    //temporaire, permet de retourner un tableau au lieu d'un objet
-    DB::setFetchMode(PDO::FETCH_ASSOC);
-
-	$keywords = $request->input('recherche');
-	$words = $parts = explode(" ", $keywords);
-
-    $words_id = array();
-    $related_website_ids = array();
-    $results = array();
-    $q = array();
-
-    foreach($words as $word)
-    {
-        $words_id[] = DB::select("SELECT ID FROM KEYWORDS WHERE TEXT='".$word."'")[0]["ID"];
+    public function getForm() {
+        return view('VueRecherche/recherche');
     }
 
-    $sqlformat1 = "(";
-
-    $index = 1;
-    foreach($words_id as $word_id)
+    public function postForm(Request $request)
     {
-        $sqlformat1 .= "'".$word_id."'";
-        if ($index != sizeof($words_id))
-            $sqlformat1 .= ",";
-        $index++;
-    }
-    $sqlformat1 .= ")";
+        $tab = $this->recherche($request->input('recherche'), 1);
 
-    $query = "SELECT DISTINCT WEBSITEID FROM LINK WHERE KEYWORDID in ".$sqlformat1." AND IMPORTANCE > 1";
-    $q[] = $query;
-    $results = DB::select($query);
-
-    foreach($results as $result)
-    {
-        $related_website_ids[] = $result['WEBSITEID'];
+        return view('VueRecherche/resultat')->with($tab);
     }
 
-    $sqlformat = "(";
-
-    $index = 1;
-    foreach($related_website_ids as $related_website_id)
+    public function getResults($keywords, $start)
     {
-        $sqlformat .= "'".$related_website_id."'";
-        if ($index != sizeof($related_website_ids))
-            $sqlformat .= ",";
-        $index++;
+        $tab = $this->recherche($keywords, 2, $start);
+
+        return view('VueRecherche/resultat')->with($tab);
     }
-    $sqlformat .= ")";
 
-    $query = "SELECT WEBSITEID, SUM(IMPORTANCE) FROM ( SELECT * FROM LINK WHERE KEYWORDID IN ".$sqlformat1." AND IMPORTANCE > 1 ) temp GROUP BY WEBSITEID ORDER BY SUM(IMPORTANCE) DESC";
-    $q[] = $query;
-    $results = DB::select($query);
+    public function recherche($parkeywords, $mode, $start = 0)
+    {
+        //temporaire, permet de retourner un tableau au lieu d'un objet
+        DB::setFetchMode(PDO::FETCH_ASSOC);
 
-    /* données de test */
-	$data = array();
+        $keywords = $parkeywords;
+        if($mode == 1)
+        {
+            $words = $parts = explode(" ", $keywords);
+        }
+        else
+        {
+            $words = $parts = explode("+", $keywords);
+        }
 
-	$data[] = array("Titre bidon 1", "http://bidonville.com");
-	$data[] = array("Titre bidon 2", "http://feezzef.com");
-	$data[] = array("Titre bidon 3", "http://lomaoe.com");
+        $words_id = array();
+        $related_website_ids = array();
+        $results = array();
+        $q = array();
 
-	$tab = array("data" => $data, "keywords" => $keywords, "words" => $words, "related_website_ids" => $related_website_ids, "results" => $results, "queries" => $q);
+        foreach($words as $word)
+        {
+            $result = DB::select("SELECT ID FROM KEYWORDS WHERE TEXT='".$word."'");
+            if (sizeof($result) > 0)
+                $words_id[] = $result[0]["ID"];
+        }
 
-    //remise en mode objet
-    DB::setFetchMode(PDO::FETCH_CLASS);
+        //si la BDD ne contient aucun mot-clé entré, on s'arrête ici
+        if(sizeof($words_id[]) == 0)
+            return False;
 
-	return view('VueRecherche/resultat')->with($tab);
-  }
+        $sqlformat1 = "(";
+
+        $index = 1;
+        foreach($words_id as $word_id)
+        {
+            $sqlformat1 .= "'".$word_id."'";
+            if ($index != sizeof($words_id))
+                $sqlformat1 .= ",";
+            $index++;
+        }
+        $sqlformat1 .= ")";
+
+        $query = "SELECT DISTINCT WEBSITEID FROM LINK WHERE KEYWORDID in ".$sqlformat1." AND IMPORTANCE > 1";
+        $q[] = $query;
+        $results = DB::select($query);
+        $count = sizeof($results);
+
+        foreach($results as $result)
+        {
+            $related_website_ids[] = $result['WEBSITEID'];
+        }
+
+        $sqlformat = "(";
+
+        $index = 1;
+        foreach($related_website_ids as $related_website_id)
+        {
+            $sqlformat .= "'".$related_website_id."'";
+            if ($index != sizeof($related_website_ids))
+                $sqlformat .= ",";
+            $index++;
+        }
+        $sqlformat .= ")";
+
+        //mode POST
+        if($mode == 1)
+        {
+            $query = "SELECT DISTINCT WEBSITEID, SUM(IMPORTANCE) FROM ( SELECT * FROM LINK WHERE KEYWORDID IN ".$sqlformat1." AND IMPORTANCE > 1 ) temp GROUP BY WEBSITEID ORDER BY SUM(IMPORTANCE) DESC";
+            $q[] = $query;
+            $results = DB::select($query);
+
+            $tab = array("keywords" => $keywords, "words" => $words, "related_website_ids" => $related_website_ids, "results" => $results, "queries" => $q);
+        }
+        //mode GET
+        else
+        {
+            if ($start < 0)
+                $start = 0;
+
+            $query = "SELECT WEBSITEID, SUM(IMPORTANCE) FROM ( SELECT * FROM LINK WHERE KEYWORDID IN ".$sqlformat1." AND IMPORTANCE > 1 ) temp GROUP BY WEBSITEID ORDER BY SUM(IMPORTANCE) DESC LIMIT ".$start.",10";
+            $q[] = $query;
+            $results = DB::select($query);
+
+            if($start < 10)
+                $current_page = 1;
+            else
+            {
+                $current_page = ceil(($start+1)/10);
+            }
+
+            $tab = array("keywords" => $keywords, "words" => $words, "related_website_ids" => $related_website_ids, "results" => $results, "queries" => $q, "count" => $count, "current_page" => $current_page, "start" => $start);
+        }
+        //remise en mode objet
+        DB::setFetchMode(PDO::FETCH_CLASS);
+
+        return $tab;
+    }
 }
