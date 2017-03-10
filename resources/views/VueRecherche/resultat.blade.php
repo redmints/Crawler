@@ -23,28 +23,54 @@
 		</header>
 		<!--Affichage des resultats-->
 		<?php
-			echo "<br/>";
-			echo "Nombre de sites contenant au moins un des mot-clés : ";
-			echo $count;
-			echo "<br/>";
-			echo "Page actuelle : ";
-			echo $current_page;
-			echo "<br/>";
-			echo "Start : ".$start;
-			echo "<br/>";
+			if ($results != False)
+			{
+				echo "<br/>";
+				echo "Nombre de résultats : ";
+				echo $count;
+				echo "<br/>";
+				echo "Page actuelle : ";
+				echo $current_page." (résultats de ".$start." à ".($start+9).")";
+				echo "<br/>";
 
-			echo "Liste des résultats par ordre de pertinence : <br/>";
-			foreach($results as $a)
-			{
-				print_r($a);
-				echo "<br/>";
+				echo "Liste des résultats par ordre de pertinence : <br/>";
+				foreach($results as $a)
+				{
+					print_r($a);
+					echo "<br/>";
+				}
+				/*echo "<br/>";
+				echo "Liste des requêtes SQL : <br/>";
+				foreach($queries as $query)
+				{
+					echo $query;
+					echo "<br/>";
+				}
+
+				code de nicolas qui servira pour l'affichage à la fin :
+				<div id="main_block">
+				    @foreach($results as $tab)
+				        <div class="result_block">
+				            <h3>{{ $tab }}</h3>
+				            <a class="link_web" href="#">{{ $tab[1] }}</a>
+				            <span class="resume">
+				                Qui cum venisset ob haec festinatis itineribus Antiochiam,
+				                praestrictis palatii ianuis, contempto Caesare, quem videri decuerat,
+				                ad praetorium cum pompa sollemni perrexit morbosque diu causatus nec
+				                regiam introiit nec processit in publicum.
+				                Qui cum venisset ob haec festinatis itineribus Antiochiam,
+				                praestrictis palatii ianuis, contempto Caesare, quem videri decuerat,
+				                ad praetorium cum pompa sollemni perrexit morbosque diu causatus nec
+				                regiam introiit nec processit in publicum.
+				            </span>
+				        </div>
+				    @endforeach
+				</div>
+				*/
 			}
-			echo "<br/>";
-			echo "Liste des requêtes SQL : <br/>";
-			foreach($queries as $query)
+			else
 			{
-				echo $query;
-				echo "<br/>";
+				echo "<br/>Aucun résultat";
 			}
 		?>
 	</body>
