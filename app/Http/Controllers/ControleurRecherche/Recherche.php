@@ -41,7 +41,7 @@ class Recherche extends Controller
 
         foreach($words as $word)
         {
-            $result = DB::select("SELECT ID FROM KEYWORDS WHERE TEXT='".$word."'");
+            $result = DB::select("SELECT ID FROM keywords WHERE TEXT='".$word."'");
             if (sizeof($result) > 0)
                 $words_id[] = $result[0]["ID"];
         }
@@ -62,14 +62,14 @@ class Recherche extends Controller
         }
         $sqlformat1 .= ")";
 
-        $query = "SELECT DISTINCT WEBSITEID FROM LINK WHERE KEYWORDID in ".$sqlformat1." AND IMPORTANCE > 1";
+        $query = "SELECT DISTINCT websiteid FROM link WHERE keywordid in ".$sqlformat1." AND importance > 1";
         $q[] = $query;
         $results = DB::select($query);
         $count = sizeof($results);
 
         foreach($results as $result)
         {
-            $related_website_ids[] = $result['WEBSITEID'];
+            $related_website_ids[] = $result['websiteid'];
         }
 
         $sqlformat = "(";
@@ -87,7 +87,7 @@ class Recherche extends Controller
         if ($start < 0)
             $start = 0;
 
-        $query = "SELECT WEBSITEID, SUM(IMPORTANCE) FROM ( SELECT * FROM LINK WHERE KEYWORDID IN ".$sqlformat1." AND IMPORTANCE > 1 ) temp GROUP BY WEBSITEID ORDER BY SUM(IMPORTANCE) DESC LIMIT ".$start.",10";
+        $query = "SELECT websiteid, SUM(importance) FROM ( SELECT * FROM link WHERE keywordid IN ".$sqlformat1." AND importance > 1 ) temp GROUP BY websiteid ORDER BY SUM(importance) DESC LIMIT ".$start.",10";
         $q[] = $query;
         $results = DB::select($query);
 
