@@ -4,7 +4,7 @@
 		<meta charset="utf8">
 		<title>Woble</title>
 		<meta name="viewport" content="width=device-width">
-		<link href="/Crawler/public/style.css" rel="stylesheet" type="text/css">
+		<link href="./../../style.css" rel="stylesheet" type="text/css">
 		<link rel="icon" type="image/png" href="img/icon.png">
 		<!--Font style-->
 		<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
@@ -13,8 +13,8 @@
 	<body>
 		<!--Entete du site-->
 		<header>
-			<a href="/Crawler/public"><div id="result_title">WOBLE</div></a>
-			<form id="search_form_result" action="/Crawler/public/resultat" method="post">
+			<a href="./../../"><div id="result_title">WOBLE</div></a>
+			<form id="search_form_result" action="./../../resultat" method="post">
 				{{ csrf_field() }}
 				<input class="search_bar_result" name="recherche" type="text" value="<?php echo $keywords ; ?>">
 				</input>
@@ -47,7 +47,7 @@
 					echo "<br/>";
 				}
 
-				code de nicolas qui servira pour l'affichage à la fin :
+				!code de nicolas qui servira pour l'affichage à la fin :
 				<div id="main_block">
 				    @foreach($results as $tab)
 				        <div class="result_block">
