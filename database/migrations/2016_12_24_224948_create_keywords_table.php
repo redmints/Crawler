@@ -16,7 +16,7 @@ class CreateKeywordsTable extends Migration
       Schema::create('keywords', function(Blueprint $table) {
         $table->increments('id');
         $table->string('text', 10000);
-        $table->integer('frequency')->default(0);
+        $table->index('text');
       });
     }
 

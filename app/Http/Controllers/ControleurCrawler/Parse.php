@@ -79,6 +79,7 @@ class Parse extends Controller
   public static function normaliseMot($str) {
     $str = strtolower($str);
     $str = preg_replace('~[^\pL\d]+~u', '', $str);
+    $str = utf8_encode($str);
     return $str;
   }
 

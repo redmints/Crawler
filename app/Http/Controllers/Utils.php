@@ -12,7 +12,7 @@ class Utils extends Controller
 
     $str = "[".$date." ".$heure."] ".$str."\n";
 
-    $monfichier = fopen('logs.txt', 'a+');
+    $monfichier = fopen('logs.log', 'a+');
     fputs($monfichier, $str);
     fclose($monfichier);
   }

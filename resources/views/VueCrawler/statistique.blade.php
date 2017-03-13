@@ -28,7 +28,7 @@
 						toolTipContent: "{indexLabel} - {y} (#percent %)",
 						dataPoints: [
 							@foreach ($keywords as $keyword)
-								{ y: {{ $keyword->frequency }}, indexLabel: "{{ $keyword->text }}" },
+								{ y: {{ $keyword["frequency"] }}, indexLabel: "{{ $keyword["text"] }}" },
 							@endforeach
 						]
 					}
