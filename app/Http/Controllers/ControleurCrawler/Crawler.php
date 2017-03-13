@@ -32,6 +32,7 @@ class Crawler extends Controller
       Crawler::insertUrl($url);
     }
     while((($website = DB::table('website')->where('etat','=','0')->first()) != null) && ($pagesCrawl < $nbPages)) {
+      Utils::log("Crawl numero ".$pagesCrawl);
       $url = $website->url;
       $websiteid = $website->id;
       Crawler::go($url, $websiteid, $ignoreMots);
