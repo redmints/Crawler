@@ -32,9 +32,9 @@ class Crawler extends Controller
       Crawler::insertUrl($url);
     }
     while((($website = DB::table('website')->where('etat','=','0')->first()) != null) && ($pagesCrawl < $nbPages)) {
-      Utils::log("Crawl numero ".$pagesCrawl);
       $url = $website->url;
       $websiteid = $website->id;
+      Utils::log("Page numero ".$websiteid);
       Crawler::go($url, $websiteid, $ignoreMots);
       $pagesCrawl += 1;
     }
@@ -135,11 +135,13 @@ class Crawler extends Controller
       $title = $parse[1];
       Utils::log("Début de l'insertion des mots");
       foreach ($mots as $mot => $tab) {
-        $keywordid = Crawler::insertKeyword($mot, $ignoreMots);
-        $importance = $tab[0];
-        $freq = $tab[1];
-        if($keywordid != 0) {
-          Crawler::insertLink($websiteid, $keywordid, $freq, $importance);
+        if(gettype($mot) == "string") {
+          $keywordid = Crawler::insertKeyword($mot, $ignoreMots);
+          $importance = $tab[0];
+          $freq = $tab[1];
+          if($keywordid != 0) {
+            Crawler::insertLink($websiteid, $keywordid, $freq, $importance);
+          }
         }
       }
     }
