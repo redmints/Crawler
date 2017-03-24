@@ -11,8 +11,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 	</head>
 	<body>
-		{!! Form::open(['url'=>'crawler', 'id'=>'form_crawl']) !!}
-			{{ csrf_field() }}
+		{!! Form::open(['url'=>'crawler', 'method' => 'get', 'id'=>'form_crawl']) !!}
 			{!! Form::submit('Accès Crawler', ['class'=>'red_button']) !!}
 		{!! Form::close() !!}
 		<div id="main_box">

@@ -13,14 +13,12 @@ class Recherche extends Controller
         return view('VueRecherche/recherche');
     }
 
-    public function postForm(Request $request)
-    {
+    public function postForm(Request $request) {
         $keywords = str_replace(" ", "+", $request->input('recherche'));
         return redirect("resultat/".$keywords."/0");
     }
 
-    public function getResults($keywords, $start)
-    {
+    public function getResults($keywords, $start) {
         $tab = $this->recherche($keywords, $start);
 
         return view('VueRecherche/resultat')->with($tab);
