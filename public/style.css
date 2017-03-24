@@ -159,3 +159,26 @@ header {
 	word-wrap: break-word;
 	width: 100%;
 }
+
+#form_crawl {
+	position: absolute;
+	top: 20px;
+	right: 50px;
+}
+.red_button {
+	background-color: #ed5555;
+	text-align: center;
+	color: #fff;
+	border-radius: 2px;
+	font-size: 15px;
+	border: none;
+	padding: 1px 20px;
+	cursor: pointer;
+}	
+.red_button:hover {
+	background-color: #E84545;
+}
+
+.red_button:active {
+	transform: scale(0.95);
+}
