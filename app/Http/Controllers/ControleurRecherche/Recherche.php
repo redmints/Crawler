@@ -105,7 +105,7 @@ class Recherche extends Controller
           $website = $tab["results"][$i];
           $websiteid = $website["websiteid"];
           $websitename = DB::table('website')->where('id', $websiteid)->first();
-          $retour["title"] = $websitename["title"];
+          $retour["title"] = utf8_decode($websitename["title"]);
           $retour["url"] = $websitename["url"];
           $return[] = $retour;
         }

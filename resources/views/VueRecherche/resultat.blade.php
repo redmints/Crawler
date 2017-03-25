@@ -26,7 +26,7 @@
 				    @foreach($tab as $result)
 				        <div class="result_block">
 				            <h3>{{ $result["title"] }}</h3>
-				            <a class="link_web" href="#">{{ $result["url"] }}</a>
+				            <a class="link_web" href="{{ $result["url"] }}">{{ $result["url"] }}</a>
 				        </div>
 				    @endforeach
 				</div>
