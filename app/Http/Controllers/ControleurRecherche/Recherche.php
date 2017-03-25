@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use PDO;
+use App\Http\Controllers\Utils;
 
 class Recherche extends Controller
 {
@@ -23,7 +24,8 @@ class Recherche extends Controller
     {
         $tab = $this->recherche($keywords, $start);
 
-        return view('VueRecherche/resultat')->with($tab);
+        return view('VueRecherche/resultat', compact('tab'));
+        //return print_r($tab);
     }
 
     public function recherche($parkeywords, $start = 0)
@@ -99,10 +101,19 @@ class Recherche extends Controller
         }
 
         $tab = array("keywords" => $keywords, "words" => $words, "related_website_ids" => $related_website_ids, "results" => $results, "queries" => $q, "count" => $count, "current_page" => $current_page, "start" => $start);
-
+        $return = array();
+        for($i = 0; $i < count($tab["results"]); $i++) {
+          $retour = array();
+          $website = $tab["results"][$i];
+          $websiteid = $website["websiteid"];
+          $websitename = DB::table('website')->where('id', $websiteid)->first();
+          $retour["title"] = $websitename["title"];
+          $retour["url"] = $websitename["url"];
+          $return[] = $retour;
+        }
         //remise en mode objet
         DB::setFetchMode(PDO::FETCH_CLASS);
 
-        return $tab;
+        return $return;
     }
 }
