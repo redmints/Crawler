@@ -12,6 +12,6 @@
 	<body>
 		<a href="./"><h1>WOBLE</h1></a>
 		Resultats :<br>
-		
+		{{ $keywords }}		
 	</body>
 </html>
