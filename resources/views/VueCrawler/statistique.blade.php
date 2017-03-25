@@ -51,8 +51,8 @@
 				});
 				piechart.render();
 				columnchart.render();
-			}-->
-		</script>
+			}
+		</script>-->
 	</head>
 	<body>
 		<a href="./"><h1>WOBLE</h1></a>
