@@ -160,11 +160,16 @@ header {
 	width: 100%;
 }
 
-#form_crawl {
+#form_block {
 	position: absolute;
+	text-align: right;
 	top: 20px;
 	right: 50px;
 }
+.form_crawl {
+	margin: 5px 0;
+}
+
 .red_button {
 	background-color: #ed5555;
 	text-align: center;
