@@ -10,9 +10,16 @@ use App\Http\Controllers\Utils;
 class Statistique extends Controller
 {
   public function getForm() {
-    $sites = DB::table('website')->where('etat','=','1')->get();
+	//select id, websiteid, keywordid, max(frequency) from link group by websiteid;
+	$keywords = DB::table('link')->find(DB::table('link')->max('frequency'))->take(10)->get();
+	
+    /*
+	==>ancien code
+	
+	$sites = DB::table('website')->where('etat','=','1')->get();
     $nbsites = count($sites);
     $keywords = DB::table('keywords')->orderBy('frequency', 'desc')->take(10)->get();
+	
     $links = array();
     for($i = 1; $i < 6; $i++) {
       $keyword_id = DB::table('link')->where('websiteid','=',$i)->orderBy('frequency', 'desc')->first();
@@ -25,5 +32,7 @@ class Statistique extends Controller
     }
     return view('VueCrawler/statistique', compact('sites', 'keywords', 'links', 'nbsites'));
     //return print_r($links);
+	*/
+	return view('VueCrawler/statistique', compact(keywords));
   }
 }

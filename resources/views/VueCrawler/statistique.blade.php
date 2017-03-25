@@ -56,7 +56,9 @@
 	</head>
 	<body>
 		<a href="./"><h1>WOBLE</h1></a>
-		<div class="bloc">
+		Resultats :<br> {{ $keywords }}
+		<!-- Ancien code
+			<div class="bloc">
 			<h2>Statistiques de l'opération de crawling</h2>
 			<p>
 				Nombre de sites crawlés : {{ $nbsites }}<br>
@@ -85,6 +87,6 @@
 		<h2>Les 10 mots les plus rencontrés</h2>
 		<div id="piechart_mots"></div>
 		<h2>Le mot le plus rencontré par sites</h2>
-		<div id="columnchart_mots"></div>
+		<div id="columnchart_mots"></div> -->
 	</body>
 </html>
