@@ -11,7 +11,7 @@ class Statistique extends Controller
 {
   public function getForm() {
 	//select id, websiteid, keywordid, max(frequency) from link group by websiteid;
-	$keywords = DB::table('link')->find(DB::table('link')->max('frequency'))->take(10)->get();
+	//$keywords = DB::table('link')->find(DB::table('link')->max('frequency'))->take(10)->get();
 	
     /*
 	==>ancien code
@@ -33,6 +33,8 @@ class Statistique extends Controller
     return view('VueCrawler/statistique', compact('sites', 'keywords', 'links', 'nbsites'));
     //return print_r($links);
 	*/
-	return view('VueCrawler/statistique', compact('keywords'));
+	
+	//return view('VueCrawler/statistique', compact('keywords'));
+	return view('VueCrawler/statistique');
   }
 }
