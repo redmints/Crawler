@@ -66,7 +66,9 @@ class Recherche extends Controller
         $query = "SELECT DISTINCT websiteid FROM link WHERE keywordid in ".$sqlformat1." AND importance > 1";
         $q[] = $query;
         $results = DB::select($query);
-        $count = ceil(sizeof($results)/10);
+
+        $count = sizeof($results);
+        $nbrpages = ceil(sizeof($results)/10);
 
         foreach($results as $result)
         {
@@ -92,7 +94,7 @@ class Recherche extends Controller
         $q[] = $query;
         $results = DB::select($query);
 
-        $tab = array("keywords" => $keywords, "words" => $words, "queries" => $q, "results" => $results, "count" => $count, "current_page" => $start);
+        $tab = array("keywords" => $keywords, "words" => $words, "queries" => $q, "results" => $results, "nbrpages" => $nbrpages, "count" => $count, "current_page" => $start);
         $return = array();
         for($i = 0; $i < count($tab["results"]); $i++) {
             $retour = array();

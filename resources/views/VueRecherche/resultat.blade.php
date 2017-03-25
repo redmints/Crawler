@@ -26,12 +26,13 @@
 			@if($tab['results'] == False)
 				Aucun résultat
 			@else
-		    @foreach($tab['return'] as $result)
-		        <div class="result_block">
-		            <a class="link_title" href="{{ $result["url"] }}"><h3>{{ $result["title"] }}</h3></a>
-		            <span class="link_web">{{ $result["url"] }}</span>
-		        </div>
-		    @endforeach
+				<b>{{ $tab['count'] }}</b> résultat(s) trouvés.
+			    @foreach($tab['return'] as $result)
+			        <div class="result_block">
+			            <a class="link_title" href="{{ $result["url"] }}"><h3>{{ $result["title"] }}</h3></a>
+			            <span class="link_web">{{ $result["url"] }}</span>
+			        </div>
+			    @endforeach
 			@endif
 			<div id="pagination">
 				@if($tab['results'] != False)
@@ -40,13 +41,13 @@
 					@else
 						Page précédente
 					@endif
-					@if($tab['current_page'] < $tab['count'])
+					@if($tab['current_page'] < $tab['nbrpages'])
 						<a class="link_title" href="./{{ $tab['current_page']+1}}">Page suivante</a>
 					@else
 						Page suivante
 					@endif
 					<div>
-						Page <b>{{ $tab['current_page'] }}</b> sur {{ $tab['count'] }}
+						Page <b>{{ $tab['current_page'] }}</b> sur {{ $tab['nbrpages'] }}
 					</div>
 				@endif
 			</div>
