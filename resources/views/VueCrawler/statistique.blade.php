@@ -56,7 +56,7 @@
 	</head>
 	<body>
 		<a href="./"><h1>WOBLE</h1></a>
-		Resultats :<br> {{ $keywords }}
+		Resultats :<br>
 		<!-- Ancien code
 			<div class="bloc">
 			<h2>Statistiques de l'opération de crawling</h2>
