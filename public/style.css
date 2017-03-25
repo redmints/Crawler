@@ -5,7 +5,7 @@ body{
 }
 /*index*/
 #main_box{
-	width: 50%;	
+	width: 50%;
 	position: absolute;
 	top: 45%;
 	left: 50%;
@@ -137,6 +137,11 @@ header {
 	border: 1px solid #ed5555;
 }
 
+.result_block .link_title {
+	text-decoration: none;
+	color: #000;
+}
+
 .result_block h3 {
 	margin: 0;
 	width: 100%;
@@ -179,7 +184,7 @@ header {
 	border: none;
 	padding: 1px 20px;
 	cursor: pointer;
-}	
+}
 .red_button:hover {
 	background-color: #E84545;
 }

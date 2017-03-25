@@ -22,7 +22,7 @@ class Recherche extends Controller
     public function getResults($keywords, $start) {
         $tab = $this->recherche($keywords, $start);
 
-        return view('VueRecherche/resultat', compact('tab'));
+        return view('VueRecherche/resultat', compact('tab', 'keywords'));
         //return print_r($tab);
     }
 
