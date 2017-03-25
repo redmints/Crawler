@@ -37,14 +37,10 @@
 			<div id="pagination">
 				@if($tab['results'] != False)
 					@if($tab['current_page'] > 1)
-						<a class="link_title" href="./{{ $tab['current_page']-1}}">Page précédente</a>
-					@else
-						Page précédente
+						<a class="link_title" href="./{{ $tab['current_page']-1}}">Précédent</a>
 					@endif
 					@if($tab['current_page'] < $tab['nbrpages'])
-						<a class="link_title" href="./{{ $tab['current_page']+1}}">Page suivante</a>
-					@else
-						Page suivante
+						<a class="link_title" href="./{{ $tab['current_page']+1}}">Suivant</a>
 					@endif
 					<div>
 						Page <b>{{ $tab['current_page'] }}</b> sur {{ $tab['nbrpages'] }}
