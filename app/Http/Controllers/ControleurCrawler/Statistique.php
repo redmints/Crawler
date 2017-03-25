@@ -33,6 +33,6 @@ class Statistique extends Controller
     return view('VueCrawler/statistique', compact('sites', 'keywords', 'links', 'nbsites'));
     //return print_r($links);
 	*/
-	return view('VueCrawler/statistique', compact(keywords));
+	return view('VueCrawler/statistique', compact('keywords'));
   }
 }
