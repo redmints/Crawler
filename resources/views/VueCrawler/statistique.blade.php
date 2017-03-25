@@ -8,7 +8,7 @@
 		<!--Font style-->
 		<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
-		<!--Scripts-->
+		<!--Scripts (a refermer)
 		<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
 		<script type="text/javascript">
 			window.onload = function () {
@@ -51,7 +51,7 @@
 				});
 				piechart.render();
 				columnchart.render();
-			}
+			}-->
 		</script>
 	</head>
 	<body>
