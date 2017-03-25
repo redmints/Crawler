@@ -16,23 +16,40 @@
 			<a href="./../../"><div id="result_title">WOBLE</div></a>
 			<form id="search_form_result" action="./../../resultat" method="post">
 				{{ csrf_field() }}
-				<input class="search_bar_result" name="recherche" type="text" value="{{$keywords}}">
+				<input class="search_bar_result" name="recherche" type="text" enctype="text/plain" value="{{$keywords}}">
 				</input>
 				<input class="search_button_result" type="submit" value=""></input>
 			</form>
 		</header>
 		<!--Affichage des resultats-->
-				<div id="main_block">
-					@if(empty($tab))
-						Aucun résultat
+		<div id="main_block">
+			@if($tab['results'] == False)
+				Aucun résultat
+			@else
+		    @foreach($tab['return'] as $result)
+		        <div class="result_block">
+		            <a class="link_title" href="{{ $result["url"] }}"><h3>{{ $result["title"] }}</h3></a>
+		            <span class="link_web">{{ $result["url"] }}</span>
+		        </div>
+		    @endforeach
+			@endif
+			<div id="pagination">
+				@if($tab['results'] != False)
+					@if($tab['current_page'] > 1)
+						<a class="link_title" href="./{{ $tab['current_page']-1}}">Page précédente</a>
 					@else
-				    @foreach($tab as $result)
-				        <div class="result_block">
-				            <a class="link_title" href="{{ $result["url"] }}"><h3>{{ $result["title"] }}</h3></a>
-				            <span class="link_web">{{ $result["url"] }}</span>
-				        </div>
-				    @endforeach
+						Page précédente
 					@endif
-				</div>
+					@if($tab['current_page'] < $tab['count'])
+						<a class="link_title" href="./{{ $tab['current_page']+1}}">Page suivante</a>
+					@else
+						Page suivante
+					@endif
+					<div>
+						Page <b>{{ $tab['current_page'] }}</b> sur {{ $tab['count'] }}
+					</div>
+				@endif
+			</div>
+		</div>
 	</body>
 </html>
