@@ -200,3 +200,12 @@ header {
 	height: 100px;
 	left: calc(50% - 200px);
 }
+
+.link_page {
+    text-decoration: none;
+    color: #e82727;
+}
+
+.link_page {
+	text-decoration: underline;
+}
