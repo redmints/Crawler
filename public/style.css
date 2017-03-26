@@ -206,6 +206,6 @@ header {
     color: #e82727;
 }
 
-.link_page {
+.link_page:hover{
 	text-decoration: underline;
 }
