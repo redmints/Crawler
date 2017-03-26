@@ -11,7 +11,31 @@
 	</head>
 	<body>
 		<a href="./"><h1>WOBLE</h1></a>
-		Resultats :<br>
-		{{ $keywords }}		
+		<div class="bloc">
+            <h2>Statistiques de l'opération de crawling</h2>
+            <p>
+                Nombre de sites crawlés : {{ $nbsites }}<br>
+            </p>
+            <p>
+                Vous trouverez ci-dessous des statistiques sur la base de données
+                sous forme de graphiques et de tableaux.
+            </p>
+        </div>
+        <br>
+        <div class="tab_site">
+            <h2>Tableaux des 10 derniers sites crawlés</h2>
+             <table style="width:100%; border-collapse:collapse;">
+                <tr>
+                    <th>Titre</th>
+                    <th>Liens</th>
+                </tr>
+                @foreach ($lastsites as $site)
+                    <tr>
+                        <td>{{ $site->title }}</td>
+                        <td>{{ $site->url }}</td>
+                    </tr>
+                @endforeach
+            </table>
+        </div>
 	</body>
 </html>
