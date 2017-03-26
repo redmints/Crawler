@@ -11,7 +11,7 @@ class Statistique extends Controller
 {
   public function getForm() {
 	//select id, websiteid, keywordid, max(frequency) from link group by websiteid;	
-	$keywords = DB::table('link')->select(['id', 'websiteid', 'keywordid', DB::raw('MAX(frequency) AS max_frequency')])->groupBy('websiteid')->first();
+	$keywords = DB::table('link')->select(['id', 'websiteid', 'keywordid'])->first();
 	
     /*
 	==>ancien code
