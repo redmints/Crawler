@@ -129,7 +129,7 @@ header {
 .result_block {
 	position: relative;
 	display: inline-block;
-	width: 90%;
+	width: 100%;
 	min-height: 50px;
 	margin: 10px 0;
 	text-align: left;
@@ -191,4 +191,12 @@ header {
 
 .red_button:active {
 	transform: scale(0.95);
+}
+
+#pagination {
+	text-align: center;
+	position: relative;
+	width: 400px;
+	height: 100px;
+	left: calc(50% - 200px);
 }
