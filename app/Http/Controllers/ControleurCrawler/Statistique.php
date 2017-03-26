@@ -10,8 +10,10 @@ use App\Http\Controllers\Utils;
 class Statistique extends Controller
 {
   public function getForm() {
-	//select id, websiteid, keywordid, max(frequency) from link group by websiteid;
-	$keywords = DB::table('link')->take(10)->get();
+	//select id, websiteid, keywordid, max(frequency) from link group by websiteid;	
+	$query = "SELECT id, websiteid, keywordid, max(frequency) FROM link GROUP BY websiteid";
+	$q[] = $query;
+	$keywords = DB::select($query);
 	
     /*
 	==>ancien code
