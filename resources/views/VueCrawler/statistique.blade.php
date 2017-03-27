@@ -12,7 +12,7 @@
 	<body>
 		<a href="./"><h1>WOBLE</h1></a>
 		<div class="bloc">
-            <h2>Statistiques de l'opération de crawling</h2>
+            <h2>Statistiques sur la base de données actuelle</h2>
             <p>
                 Nombre de sites crawlés : {{ $nbsites }}<br>
             </p>
