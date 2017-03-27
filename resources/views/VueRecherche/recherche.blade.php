@@ -11,10 +11,14 @@
 		<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 	</head>
 	<body>
-		{!! Form::open(['url'=>'crawler', 'id'=>'form_crawl']) !!}
-			{{ csrf_field() }}
-			{!! Form::submit('Accès Crawler', ['class'=>'red_button']) !!}
-		{!! Form::close() !!}
+		<div id="form_block">
+			{!! Form::open(['url'=>'crawler', 'method' => 'get', 'class'=>'form_crawl']) !!}
+				{!! Form::submit('Accès Crawler', ['class'=>'red_button']) !!}
+			{!! Form::close() !!}
+			{!! Form::open(['url'=>'stats', 'method'=>'get', 'class'=>'form_crawl']) !!}
+				{!! Form::submit('Statistiques', ['class'=>'red_button']) !!}
+			{!! Form::close() !!}
+		</div>
 		<div id="main_box">
 			<a href="./"><h1 id="main_title">WOBLE</h1></a>
 			<form id="search_form" action="resultat" method="post">

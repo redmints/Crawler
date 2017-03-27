@@ -5,7 +5,7 @@ body{
 }
 /*index*/
 #main_box{
-	width: 50%;	
+	width: 50%;
 	position: absolute;
 	top: 45%;
 	left: 50%;
@@ -129,12 +129,17 @@ header {
 .result_block {
 	position: relative;
 	display: inline-block;
-	width: 90%;
+	width: 98%;
 	min-height: 50px;
 	margin: 10px 0;
 	text-align: left;
 	padding: 5px;
 	border: 1px solid #ed5555;
+}
+
+.result_block .link_title {
+	text-decoration: none;
+	color: #000;
 }
 
 .result_block h3 {
@@ -160,11 +165,16 @@ header {
 	width: 100%;
 }
 
-#form_crawl {
+#form_block {
 	position: absolute;
+	text-align: right;
 	top: 20px;
 	right: 50px;
 }
+.form_crawl {
+	margin: 5px 0;
+}
+
 .red_button {
 	background-color: #ed5555;
 	text-align: center;
@@ -174,11 +184,28 @@ header {
 	border: none;
 	padding: 1px 20px;
 	cursor: pointer;
-}	
+}
 .red_button:hover {
 	background-color: #E84545;
 }
 
 .red_button:active {
 	transform: scale(0.95);
+}
+
+#pagination {
+	text-align: center;
+	position: relative;
+	width: 400px;
+	height: 100px;
+	left: calc(50% - 200px);
+}
+
+.link_page {
+    text-decoration: none;
+    color: #e82727;
+}
+
+.link_page:hover{
+	text-decoration: underline;
 }

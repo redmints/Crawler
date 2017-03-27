@@ -16,62 +16,39 @@
 			<a href="./../../"><div id="result_title">WOBLE</div></a>
 			<form id="search_form_result" action="./../../resultat" method="post">
 				{{ csrf_field() }}
-				<input class="search_bar_result" name="recherche" type="text" value="<?php echo $keywords ; ?>">
+				<input class="search_bar_result" name="recherche" type="text" enctype="text/plain" value="{{$keywords}}">
 				</input>
 				<input class="search_button_result" type="submit" value=""></input>
 			</form>
 		</header>
 		<!--Affichage des resultats-->
-		<?php
-			if ($results != False)
-			{
-				echo "<br/>";
-				echo "Nombre de résultats : ";
-				echo $count;
-				echo "<br/>";
-				echo "Page actuelle : ";
-				echo $current_page." (résultats de ".$start." à ".($start+9).")";
-				echo "<br/>";
-
-				echo "Liste des résultats par ordre de pertinence : <br/>";
-				foreach($results as $a)
-				{
-					print_r($a);
-					echo "<br/>";
-				}
-				/*echo "<br/>";
-				echo "Liste des requêtes SQL : <br/>";
-				foreach($queries as $query)
-				{
-					echo $query;
-					echo "<br/>";
-				}
-
-				!code de nicolas qui servira pour l'affichage à la fin :
-				<div id="main_block">
-				    @foreach($results as $tab)
-				        <div class="result_block">
-				            <h3>{{ $tab }}</h3>
-				            <a class="link_web" href="#">{{ $tab[1] }}</a>
-				            <span class="resume">
-				                Qui cum venisset ob haec festinatis itineribus Antiochiam,
-				                praestrictis palatii ianuis, contempto Caesare, quem videri decuerat,
-				                ad praetorium cum pompa sollemni perrexit morbosque diu causatus nec
-				                regiam introiit nec processit in publicum.
-				                Qui cum venisset ob haec festinatis itineribus Antiochiam,
-				                praestrictis palatii ianuis, contempto Caesare, quem videri decuerat,
-				                ad praetorium cum pompa sollemni perrexit morbosque diu causatus nec
-				                regiam introiit nec processit in publicum.
-				            </span>
-				        </div>
-				    @endforeach
-				</div>
-				*/
-			}
-			else
-			{
-				echo "<br/>Aucun résultat";
-			}
-		?>
+		<div id="main_block">
+			@if($tab['results'] == False)
+				Aucun résultat
+			@else
+				<p>
+					<b>{{ $tab['count'] }}</b> résultat(s) trouvés.
+				</p>
+			    @foreach($tab['return'] as $result)
+			        <div class="result_block">
+			            <a class="link_title" href="{{ $result["url"] }}"><h3>{{ $result["title"] }}</h3></a>
+			            <span class="link_web">{{ $result["url"] }}</span>
+			        </div>
+			    @endforeach
+			@endif
+			<div id="pagination">
+				@if($tab['results'] != False)
+					@if($tab['current_page'] > 1)
+						<a class="link_page" href="./{{ $tab['current_page']-1}}">Précédent</a>
+					@endif
+					@if($tab['current_page'] < $tab['nbrpages'])
+						<a class="link_page" href="./{{ $tab['current_page']+1}}">Suivant</a>
+					@endif
+					<div>
+						Page <b>{{ $tab['current_page'] }}</b> sur {{ $tab['nbrpages'] }}
+					</div>
+				@endif
+			</div>
+		</div>
 	</body>
 </html>
