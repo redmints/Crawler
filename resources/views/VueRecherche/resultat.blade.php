@@ -26,7 +26,9 @@
 			@if($tab['results'] == False)
 				Aucun résultat
 			@else
-				<b>{{ $tab['count'] }}</b> résultat(s) trouvés.
+				<p>
+					<b>{{ $tab['count'] }}</b> résultat(s) trouvés.
+				</p>
 			    @foreach($tab['return'] as $result)
 			        <div class="result_block">
 			            <a class="link_title" href="{{ $result["url"] }}"><h3>{{ $result["title"] }}</h3></a>
