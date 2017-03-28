@@ -25,6 +25,5 @@ class Statistique extends Controller
 	}
 	
 	return view('VueCrawler/statistique', compact('sites', 'nbsites', 'lastsites', 'links'));
-	//return view('VueCrawler/statistique');
   }
 }
