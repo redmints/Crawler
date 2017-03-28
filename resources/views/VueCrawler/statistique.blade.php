@@ -56,10 +56,8 @@
                         <td>{{  utf8_decode($site->url) }}</td>
                     </tr>
                 @endforeach
-				@if (count($lastsites->url)>0)
 					<h2>Les mots les plus importants dans les 10 derniers sites</h2>
 					<div id="columnchart_mots"></div>
-				@endif
             </table>
         </div>
 	</body>
