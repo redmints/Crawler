@@ -56,9 +56,9 @@
                         <td>{{  utf8_decode($site->url) }}</td>
                     </tr>
                 @endforeach
-					<h2>Les mots les plus importants dans les 10 derniers sites</h2>
-					<div id="columnchart_mots"></div>
             </table>
+			<h2>Les mots les plus importants dans les 10 derniers sites</h2>
+			<div id="columnchart_mots"></div>
         </div>
 	</body>
 </html>
