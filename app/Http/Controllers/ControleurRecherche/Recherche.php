@@ -16,7 +16,7 @@ class Recherche extends Controller
 
     public function postForm(Request $request) {
 		if($keywords == "")
-			$keywords = " "
+			$keywords = " ";
         $keywords = str_replace(" ", "+", $request->input('recherche'));
         return redirect("resultat/".$keywords."/1");
     }
