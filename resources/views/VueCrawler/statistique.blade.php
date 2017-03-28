@@ -31,8 +31,8 @@
                 </tr>
                 @foreach ($lastsites as $site)
                     <tr>
-                        <td>{{ $site->title }}</td>
-                        <td>{{ $site->url }}</td>
+                        <td>{{  utf8_decode($site->title) }}</td>
+                        <td>{{  utf8_decode($site->url) }}</td>
                     </tr>
                 @endforeach
             </table>
