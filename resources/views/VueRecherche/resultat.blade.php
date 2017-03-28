@@ -31,7 +31,7 @@
 				</p>
 			    @foreach($tab['return'] as $result)
 			        <div class="result_block">
-			            <a class="link_title" href="{{ $result["url"] }}"><h3>{{  utf8_decode($result["title"]) }}</h3></a>
+			            <a class="link_title" href="{{ $result["url"] }}"><h3>{{ $result["title"] }}</h3></a>
 			            <span class="link_web">{{ $result["url"] }}</span>
 			        </div>
 			    @endforeach
