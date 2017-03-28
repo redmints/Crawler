@@ -9,7 +9,6 @@
 		<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 		<!-- Scripts -->
-		
 	</head>
 	<body>
 		<a href="./"><h1>WOBLE</h1></a>
