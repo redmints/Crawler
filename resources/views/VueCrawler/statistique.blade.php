@@ -18,18 +18,13 @@
 						type: "column",
 						toolTipContent: "{label} - {y}",
 						dataPoints: [
-							
+							@foreach ($links as $link)
 								{ label: "test - text",  y: 10 },
-								{ label: "test - text",  y: 10 },
-								{ label: "test - text",  y: 10 },
-								{ label: "test - text",  y: 10 },
-								{ label: "test - text",  y: 10 }
-							
+							@endforeach
 						]
 					}
 					]
 				});
-				piechart.render();
 				columnchart.render();
 			}
 		</script>
