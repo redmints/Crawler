@@ -61,9 +61,8 @@
                     </tr>
                 @endforeach
             </table>
-			<br>
-			<h2>Les mots les plus importants dans les 10 derniers sites</h2>
-			<div id="columnchart_mots"></div>
         </div>
+		<h2>Les mots les plus importants dans les 10 derniers sites</h2>
+		<div id="columnchart_mots"></div>
 	</body>
 </html>
