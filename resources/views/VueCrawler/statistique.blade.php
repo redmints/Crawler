@@ -39,7 +39,7 @@
             </table>
         </div>
 		@foreach ($links as $link)
-			<p>{{ $link["title"] }} - {{ $link["text"] }}",{{ $link["importance"] }}</p>
+			<p>{{ $link["title"] }} - {{ $link["text"] }},{{ $link["importance"] }}</p>
 		@endforeach
 	</body>
 </html>
