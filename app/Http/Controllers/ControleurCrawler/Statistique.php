@@ -13,31 +13,18 @@ class Statistique extends Controller
 	$sites = DB::table('website')->where('etat','=','1')->get();
 	$nbsites = count($sites);
 	$lastsites = DB::table('website')->where('etat','=','1')->orderBy('id', 'desc')->take(10)->get();
-	//select id, websiteid, keywordid, max(frequency) from link group by websiteid;	
-	//$keywords = DB::table('link')->first();
+	foreach($lastsites as $sites) {
+		//On recupere l'id du mot le plus important dans le site
+		$keyword_id = DB::table('link')->where('websiteid','=',$sites->id)->orderBy('importance', 'desc')->first();
+		$keyword = DB::table('keywords')->where('id','=',$keyword_id->keywordid)->first(); //le mot en question
+		$website = DB::table('website')->where('id','=',$keyword_id->websiteid)->first(); //le site en question
+		$retour["title"] = $website->title;
+		$retour["text"] = $keyword->text;
+		$retour["importance"] = $keyword_id->importance;
+		$links[] = $retour; //On le met en tab
+	}
 	
-    /*
-	==>ancien code
-	
-	$sites = DB::table('website')->where('etat','=','1')->get();
-    $nbsites = count($sites);
-    $keywords = DB::table('keywords')->orderBy('frequency', 'desc')->take(10)->get();
-	
-    $links = array();
-    for($i = 1; $i < 6; $i++) {
-      $keyword_id = DB::table('link')->where('websiteid','=',$i)->orderBy('frequency', 'desc')->first();
-      $retour["frequency"] = $keyword_id->frequency;
-      $keyword = DB::table('keywords')->where('id','=',$keyword_id->keywordid)->first();
-      $website = DB::table('website')->where('id','=',$keyword_id->websiteid)->first();
-      $retour["title"] = $website->title;
-      $retour["text"] = $keyword->text;
-      $links[] = $retour;
-    }
-    return view('VueCrawler/statistique', compact('sites', 'keywords', 'links', 'nbsites'));
-    //return print_r($links);
-	*/
-	
-	return view('VueCrawler/statistique', compact('sites', 'nbsites', 'lastsites'));
+	return view('VueCrawler/statistique', compact('sites', 'nbsites', 'lastsites', 'links'));
 	//return view('VueCrawler/statistique');
   }
 }
