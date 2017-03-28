@@ -19,7 +19,7 @@
 						toolTipContent: "{label} - {y}",
 						dataPoints: [
 							@foreach ($links as $link)
-								{ label: "test - text",  y: "test" },
+								{ label: "test - text",  y: 10 },
 							@endforeach
 						]
 					}
