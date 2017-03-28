@@ -9,6 +9,25 @@
 		<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 		<!-- Scripts -->
+		<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <script type="text/javascript">
+            window.onload = function () {
+                var columnchart = new CanvasJS.Chart("columnchart_mots", {
+                    data: [
+                    {
+                        type: "column",
+                        toolTipContent: "{label} - {y}",
+                        dataPoints: [
+                            @foreach ($links as $link)
+                                { $link["title"] }} - {{ $link["text"] }}",  y: {{ $link["frequency"] }} },
+                            @endforeach
+                        ]
+                    }
+                    ]
+                });
+                columnchart.render();
+            }
+        </script>
 	</head>
 	<body>
 		<a href="./"><h1>WOBLE</h1></a>
@@ -38,5 +57,7 @@
                 @endforeach
             </table>
         </div>
+		<h2>Les mots les plus importants dans les 10 derniers sites</h2>
+        <div id="columnchart_mots"></div>
 	</body>
 </html>
