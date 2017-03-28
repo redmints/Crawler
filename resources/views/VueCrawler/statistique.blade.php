@@ -19,7 +19,7 @@
                         toolTipContent: "{label} - {y}",
                         dataPoints: [
                             @foreach ($links as $link)
-                                { "{{$link["title"] }} - {{ $link["text"] }}",  y: {{ $link["importance"] }} },
+                                { "{{ $link["title"] }} - {{ $link["text"] }}",  y: {{ $link["importance"] }} },
                             @endforeach
                         ]
                     }
