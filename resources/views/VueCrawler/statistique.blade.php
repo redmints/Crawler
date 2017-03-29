@@ -23,7 +23,7 @@
         </div>
         <br>
 		<h2>Tableaux des 10 derniers sites crawlés</h2>
-		 <table class="tab_site" style="width:100%; border-collapse:collapse;">
+		 <table class="tab_site" style="border-collapse:collapse;">
 			<tr>
 				<th>Titre</th>
 				<th>Liens</th>
