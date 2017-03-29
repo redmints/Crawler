@@ -70,13 +70,11 @@ h2 {
 .tab_site td, .tab_site th{
 	border: 1px solid black;
 	background-color: #ffffff;
-}
-
-.tab_site td {
 	width: 50%;
 	word-wrap: break-word;
     -moz-hyphens:auto; 
     -webkit-hyphens:auto; 
     -o-hyphens:auto; 
-    hyphens:auto; 
+    hyphens:auto;
 }
+

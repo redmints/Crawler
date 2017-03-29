@@ -15,7 +15,7 @@
 			{!! Form::open(['url'=>'crawler', 'method' => 'get', 'class'=>'form_crawl']) !!}
 				{!! Form::submit('Accès Crawler', ['class'=>'red_button']) !!}
 			{!! Form::close() !!}
-			{!! Form::open(['url'=>'statsz', 'method'=>'get', 'class'=>'form_crawl']) !!}
+			{!! Form::open(['url'=>'stats', 'method'=>'get', 'class'=>'form_crawl']) !!}
 				{!! Form::submit('Statistiques', ['class'=>'red_button']) !!}
 			{!! Form::close() !!}
 		</div>
