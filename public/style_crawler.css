@@ -74,5 +74,9 @@ h2 {
 
 .tab_site td {
 	width: 50%;
-	overflow-wrap:break-word;
+	word-wrap: break-word;
+    -moz-hyphens:auto; 
+    -webkit-hyphens:auto; 
+    -o-hyphens:auto; 
+    hyphens:auto; 
 }
