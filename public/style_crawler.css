@@ -73,8 +73,6 @@ h2 {
 }
 
 .tab_site td {
-	border: 1px solid black;
-	background-color: #ffffff;
 	width: 50%;
-	word-wrap: break-word;
+	overflow-wrap:break-word;
 }

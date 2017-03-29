@@ -22,20 +22,18 @@
             </p>
         </div>
         <br>
-        <div class="tab_site">
-            <h2>Tableaux des 10 derniers sites crawlés</h2>
-             <table style="width:100%; border-collapse:collapse;">
-                <tr>
-                    <th>Titre</th>
-                    <th>Liens</th>
-                </tr>
-                @foreach ($lastsites as $site)
-                    <tr>
-                        <td>{{  utf8_decode($site->title) }}</td>
-                        <td>{{  utf8_decode($site->url) }}</td>
-                    </tr>
-                @endforeach
-            </table>
-        </div>
+		<h2>Tableaux des 10 derniers sites crawlés</h2>
+		 <table class="tab_site" style="width:100%; border-collapse:collapse;">
+			<tr>
+				<th>Titre</th>
+				<th>Liens</th>
+			</tr>
+			@foreach ($lastsites as $site)
+				<tr>
+					<td>{{  utf8_decode($site->title) }}</td>
+					<td>{{  utf8_decode($site->url) }}</td>
+				</tr>
+			@endforeach
+		</table>
 	</body>
 </html>
