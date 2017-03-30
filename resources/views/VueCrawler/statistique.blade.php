@@ -14,15 +14,15 @@
             window.onload = function () {
                 var columnchart = new CanvasJS.Chart("columnchart_mots", {
                     data: [
-                    {
-                        type: "column",
-                        toolTipContent: "{label} - {y}",
-                        dataPoints: [
-                            @foreach ($links as $link)
-                                { "{{ $link["title"] }} - {{ $link["text"] }}",  y: {{ $link["importance"] }} },
-                            @endforeach
-                        ]
-                    }
+						{
+							type: "column",
+							toolTipContent: "{label} - {y}",
+							dataPoints: [
+								@foreach ($links as $link)
+									{ label : "{{ $link['title'] }} - {{ $link['text'] }}",  y: {{ $link['importance'] }} },
+								@endforeach
+							]
+						}
                     ]
                 });
                 columnchart.render();
